@@ -1,0 +1,112 @@
+NALOGA 1. ZAMENJAVA stev 1 in stev 2
+
+        .text
+ STEV1:   .word 0x12345678   @8 bitno 
+ STEV2:   .word 0x11111111
+
+
+          .global __start
+__start:
+          adr r0, STEV1
+          ldr r1, [r0]
+          
+          adr r0, STEV2
+          ldr r2, [r0]
+          
+          str r1, [r0]
+          
+          adr r0, STEV1
+          str r2, [r0]
+
+  
+__end:    b __end 
+
+NALOGA 2.----------------------------------
+          .text
+TABELA: .space 5
+        .align
+
+
+
+          .global __start
+__start:
+          adr r0, TABELA
+          mov r1, #0xFF
+          
+          strb r1, [r0]
+          strb r1, [r0, #1]
+          strb r1, [r0, #2]
+          strb r1, [r0, #3]
+          strb r1, [r0, #4]
+        
+__end:    b __end 
+
+NALOGA 3.-----------------------------------------
+
+          .text
+TABELA: .space 6
+        .align
+
+
+          .global __start
+__start:
+          mov r1, #1
+          
+          adr r0, TABELA
+          
+          strb r1, [r0]
+          add r1, r1, #1
+          strb r1, [r0, #1]
+          add r1, r1, #1
+          strb r1, [r0, #2]
+          add r1, r1, #1
+          strb r1, [r0, #3]
+          add r1, r1,  #1
+          strb r1, [r0, #4]
+          add r1, r1,  #1
+          strb r1, [r0, #5]
+          
+          ldrb r1, [r0]
+          ldrb r2, [r0, #5]
+          strb r2, [r0]
+          strb r1, [r0, #5]
+          
+          ldrb r1, [r0, #1]
+          ldrb r2, [r0, #4]
+          strb r2, [r0, #1]
+          strb r1, [r0, #4]
+          
+          ldrb r1, [r0, #2]
+          ldrb r2, [r0, #3]
+          strb r2, [r0, #2]
+          strb r1, [r0, #3]
+         
+        
+__end:    b __end 
+
+NALOGA 4------------------------------------
+
+          .text
+STEV1: .word 0x12345678
+STEV2: .space 4
+
+       
+
+
+          .global __start
+__start:
+
+        adr r0, STEV1
+        adr r1, STEV2
+        ldrb r2, [r0]
+        strb r2, [r1, #3]
+        ldrb r2, [r0, #1]
+        strb r2, [r1, #2]
+        ldrb r2, [r0, #2]
+        strb r2, [r1, #1]
+        ldrb r2, [r0, #3]
+        strb r2, [r1]
+ 
+        
+__end:    b __end 
+

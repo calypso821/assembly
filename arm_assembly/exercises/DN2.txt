@@ -1,0 +1,47 @@
+.text
+
+Program deluje tako, da primerja vsaki nasledni člen. Če je pri primerjavi naslednji člen večji, bo vrednost primerjave negativna zastavica pa se postavi na N=1. Če se potem zastavica N postavi na 1 skočimo v (zanko: vecji) kjer prejšnji največji člen zamenja z novim in shrani indeks tega števila v pomnilnik. V osnovni zanki imamo še števec za štetje členov. Uporabil sem tudi primerjavo v Kateri primerja vrednost velikosti seznama in vrednost indeksa vseh členov. Če je pri tem vrednost 0 pomeni da smo prišli do zadnjega člena seznama in se lahko skočimo na konec. Na koncu še it registra 1 shranimo v pomnilnik maksimalno vrednost, indeks tega števila pa je bil shranjen že predhodno. 
+Registri: 
+R0: Naslavljanje stevil 
+R1: Shranjevanje maksimalne vrednosti
+R2: Shranjevanje vsake številke, ki jo primerjamo z maksimalno vrednostjo  
+R3: Vrednost indeksa
+R4: Naslov indeksa za shranjevanje v pomnilnik 
+Zanke: 
+Zanka: -primerja vrednosti dolžine programa in indeksa 
+            -primerja vrednosti največjega in naslednjega števila
+Vecji: Zamenja najvecji člen za primerjavo
+Shrani trenutni indeks največjega števila v pomniklnik 
+Konec: shrani največeje število v pomnilnik  
+
+=============================================================
+TABELA:   .hword   1, 5, -1, 8, -130, 1024, 10, 64, -80, 256 
+VELIKOST_TABELE:   .byte 10
+MAX_INDEKS: .byte 0
+MAX: .hword 0 
+
+.align 
+.global __start
+
+__start:         
+         adr r0, VELIKOST_TABELE
+         ldr r5, [r0]
+         adr r0, TABELA 
+         
+  zanka: ldrsh r2, [r0]
+         add r0, r0, #2 @naslednje stevilo 
+         add r3, r3, #1 @ povecevanje indeksa
+         cmp r3, r5   @primerjava za konec programa (indeks - st elementov) 
+         beq konec  @z=0
+         cmp r1, r2 @c = 0
+         bmi vecji
+         b zanka
+  vecji: mov r1, r2  @zamenja najvecji clen 
+         adr r4, MAX_INDEKS   
+         strb r3, [r4] @shrani indeks
+         b zanka 
+  konec: adr r0, MAX
+         strh r1, [r0] @sharni maximalno st s seznama
+
+
+__end:    b __end

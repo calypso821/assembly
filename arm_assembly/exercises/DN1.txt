@@ -1,0 +1,51 @@
+Program deluje tako, da vsako vrednost črke po ascii kodi, primerja z 92. Tako sem razdelil črke na male (pozitivno) in velike (negativno). Tako sem radelil črke na negativna števila (velike črke) in pozitivna števila (male črke). Pri tem smo gledali zastavico C. C=1 pri malih in C=0 pri velikih. V primeru da so bile črke male (Zanka : male), sem jim prištel 32 in tako dobil velike črke. V drugem primeru da sem dobil velike črke (Zanka: Velike), sem jim prištel 32 in tako dobil iz njim male črke. V tej zanki sem še primerjal ali je vrednost registra enaka 32 (Space) kar pomeni da nastopa Space. Obema zankama sledi (Zanka: shrani), v kateri se vrednost iz registra shrani v pomnilnik. V tej zanki se poveča tudi števec, ki šteje na katerem mestu niza smo. Na začetku sem še začetnemu naslovu niza prištel 2 kar pomeni da začnemo pri 3 črki “n”.
+Registri: 
+R0: Naslavljanje prvotnega niza 
+R3: Naslavljanje “SPREMENJENEGA” niza
+R1: Shranjevanje vrednosti niza 
+Zanke: 
+Zanka: -primerja vrednosti z 0, da vemo kdaj se program ustavi 
+            -primerja vrednosti niza (loci velike in male črke)
+Male:  spreminja male črke v velike (-32)
+Velike: spreminja velike črke v male (+32)
+            Primerja z (32) če nastopa Space
+Shrani: shranjuje vrednosti obratnik črk 
+Konec: ko pridemo do konca niza se program ustavi 
+
+==================================================================
+          .text
+          
+NIZ1: .asciz "Danes je Lep Dan"
+NIZ2: .space 17
+
+          .align
+          .global __start
+__start:
+                
+                
+        adr r0, NIZ1  @naslov nizov
+        add r0, r0, #2 @zacetek pri n
+        adr r3, NIZ2   @naslov SPREMENJENIH nizov
+        sub r3, r3, #1 @v zanki shrani pristeje +1
+  zanka:  
+        ldrb r1, [r0] 
+        add r0 , #1  @povecuje  za 1
+        cmp r1, #0  @ko pride do 0 primerja z 0
+        beq konec @z=0
+        cmp r1, #92  @primerja ali so stevila negativan/pozitivna
+        bhs male @c=1(+)
+        blo velike @c=0(-)
+  male: sub r1, r1, #32 @spremeni v velike 
+        b shrani
+velike: cmp r1, #32 @space = 32
+        beq shrani @z=0
+        add r1, r1, #32 @spremeni v male
+        b shrani
+shrani: add r3, r3, #1 @povecuje  za 1
+        strb r1, [r3]
+        b zanka
+ konec: add r3, r3, #1  @konec pri 0
+        strb r1, [r3]
+
+
+__end:    b __end 

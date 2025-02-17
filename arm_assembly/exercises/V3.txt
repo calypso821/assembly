@@ -1,0 +1,93 @@
+﻿1. Zapišite ukaz v zbirniku za procesor ARM, ki v register R1 naloži konstanto 128. Uporabite takojšnje naslavljanje (ukaz MOV). 
+Izpišite ustrezen strojni ukaz (32 – bitno število v šestnajstiški obliki). Program izvajajte po korakih in opazujte vrednosti registrov r15(PC) in R1. Kakšni sta njuni vrednosti na koncu programa?
+PRED: R15=PC= 0x020     R1= 0x00
+PO:   R15=PC  0x024     R1= 0x80
+
+2. Zapišite ukaz(e) v zbirniku za procesor ARM, ki v register naloži vrednost spremenljivke:
+
+a) naloži 32-bitno vrednost 0x12345678 v register R1
+
+b) naloži 8-bitno vrednost 128 v register R1.
+
+c) naloži 16-bitno vrednost 0xF123 v register R1
+
+
+          .text
+ STEV1:   .word 0x12345678
+ STEV2:   .byte 128
+          .align
+ STEV3:   .hword 0xF123
+
+          .align
+          .global __start
+__start:
+          adr r0,STEV1  @naslov v r0
+          ldr r1,[r0]   @load v r1
+          adr r0, STEV2 
+          ldrb r1,[r0]
+          adr r0,STEV3  
+          ldrh r1,[r0]  
+         
+
+
+__end:    b __end   
+
+Naloge rešite s posrednim (baznim) naslavljanjem brez odmika preko registra R0.
+
+
+3. Napišite zaporedje ukazov v zbirniku za procesor ARM, ki vrednost 32-bitne spremenljivke STEV1 prepiše v 32-bitno spremenljivko STEV2. Nalogo rešite še za primer, če sta spremenljivki STEV1 in STEV2 8-bitni oziroma 16-bitni. 
+Vse primere rešite s posrednim (baznim) naslavljanjem brez odmika preko registra R0.
+
+
+32-bitno -----------------------------------------------------
+          .text
+ STEV1:   .word 0x12345678   @32 bitno
+ STEV2:   .word 0x11111111
+
+          .global __start
+__start:
+          adr r0,STEV1  
+          ldr r1, [r0]  
+          adr r0, STEV2
+          str r1, [r0]            
+          ldr r2, [r0] 
+  
+__end:    b __end 
+
+16-bitno -------------------------------------------------------
+          .text
+ STEV1:   .hword 0x12345678   @16 bitno
+          .align
+ STEV2:   .hword 0x11111111
+          .align
+
+          .global __start
+__start:
+          adr r0,STEV1  
+          ldrh r1, [r0]  
+          adr r0, STEV2
+          strh r1, [r0]            
+          ldr r2, [r0] 
+  
+__end:    b __end 
+
+
+8-bitno --------------------------------------------------------
+          .text
+ STEV1:   .byte 0x12345678   @8 bitno
+          .align  
+ STEV2:   .byte 0x11111111
+          .align
+
+          .global __start
+__start:
+          adr r0,STEV1  
+          ldrb r1, [r0]  
+          adr r0, STEV2
+          strb r1, [r0]            
+          ldr r2, [r0] 
+  
+__end:    b __end 
+  
+__end:    b __end   
+

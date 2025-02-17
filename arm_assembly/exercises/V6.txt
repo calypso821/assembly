@@ -1,0 +1,64 @@
+﻿Naloge 6.
+
+
+
+        .text
+        
+        @a
+ @STEV1:   .byte 15
+ @STEV2:   .byte 130
+        @b
+ @STEV1:   .byte 15
+ @STEV2:   .byte 130
+        @c
+ STEV1:   .word 128
+ STEV2:   .byte 128
+
+          .align
+
+          .global __start
+__start:
+
+          @a
+
+          @adr r0, STEV1   
+          @ldrb r1, [r0]
+          
+          @adr r0, STEV2    
+          @ldrb r2, [r0]
+          
+          @add r3, r1, r2
+          
+          @adr r0, STEV1
+          @strb r3, [r0]
+          
+          @b
+
+          @adr r0, STEV1   
+          @ldrsb r1, [r0]
+          
+          @adr r0, STEV2    
+          @ldrsb r2, [r0]
+          
+          @add r3, r1, r2
+          
+          @adr r0, STEV1
+          @strb r3, [r0]
+          
+          @c
+
+          adr r0, STEV1   
+          ldr r1, [r0]
+          
+          adr r0, STEV2    
+          ldrsb r2, [r0]
+          
+          add r3, r1, r2
+          
+          adr r0, STEV1
+          str r3, [r0]
+
+          
+          
+__end:    b __end 
+ 

@@ -1,0 +1,3 @@
+**Pravilno umestite v pomnilniški prostor izhodni napravi FB 16x16 in TTY** po načelu "pomnilniško preslikanega vhoda/izhoda"- lahko uporabite nepopolno naslovno dekodiranje. Poskrbite, da se bo testni program za IO napravi po tej spremembi pravilno izvajal - torej se bosta izhodni **napravi pojavili za pisanje res samo na njima dodeljenih naslovih**. Spremenite testni program, da bo izrisoval vzorec na FB napravi po vaši zamisli.
+
+![naslovi](images/Naslovi.png)

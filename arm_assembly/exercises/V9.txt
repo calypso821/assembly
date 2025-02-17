@@ -1,0 +1,128 @@
+NALOGA 1------------------------------
+          .text
+          
+STEV1: .word 1
+STEV2: .word 15
+STEV3: .word 3
+
+          .align
+          .global __start
+__start:
+ 
+        adr r0, STEV1
+        ldr r1, [r0]
+        adr r0, STEV2
+        ldr r2, [r0]
+        adr r0, STEV3
+        ldr r3, [r0]
+        
+        mov r1, r2
+        cmp r1, r3
+        bgt dalje
+        mov r1, r3
+dalje:  adr r0, STEV1
+        str r1, [r0]
+        
+
+__end:    b __end    
+
+NALOGA 2------------------------------
+          .text
+          
+STEV1: .word 1
+STEV2: .word 15
+STEV3: .word 3
+
+          .align
+          .global __start
+__start:
+ 
+        adr r0, STEV1
+        ldr r1, [r0]
+        adr r0, STEV2
+        ldr r2, [r0]
+        adr r0, STEV3
+        ldr r3, [r0]
+        
+        mov r1, r2
+        cmp r1, r3
+        blt dalje
+        mov r1, r3
+dalje:  adr r0, STEV1
+        str r1, [r0]
+        
+
+__end:    b __end  
+
+
+          .text
+   stev1: .word 0
+   stev2: .word -100
+   stev3: .word 200
+          .align
+          .global __start
+__start:
+         Nepredznacena
+         mov r1, r2
+         cmp r2 , r3          
+    max 3. bgt(predznacena) min  //3. blt(predznacena)   
+    max 1. bhi Dalje   // min 2. blo Dalje
+         mov r1, r3
+         
+         
+         mov r1, r2
+         comp r2, r3
+         max movlo (movlot) r1, r3 // min movhi (movgt) r1, r3
+         
+                  
+         
+         
+         
+   Dalje:
+
+__end:    b __end     
+
+
+          .text
+   stev1: .word 0
+   stev2: .word -100
+   stev3: .word 200
+          .align
+          .global __start
+__start:
+         Nepredznacena
+         mov r1, r2
+         cmp r2 , r3          
+    max 2. bgt(predznacena) min  //2. blt(predznacena)   
+    max 1. bhi Dalje   // min 1. blo Dalje
+         mov r1, r3
+         
+         
+         mov r1, r2
+         comp r2, r3
+        3. max movlo (movlot) r1, r3 // 3. min movhi (movgt) r1, r3
+        
+        
+        4.
+        
+       zanka: cmp r1. r2
+              blo L1
+              beq L2
+              sub r1, r1, r2
+              B zanka
+              
+              
+          L1: sub r2, r2, r1
+             B zanka
+          L2: @konec  = r1, r2
+          
+         
+                  
+         
+         
+         
+   Dalje:
+
+__end:    b __end     
+
+

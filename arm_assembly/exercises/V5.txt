@@ -1,0 +1,93 @@
+1. NALOGA
+
+
+        .text
+ STEV1:   .word 10
+ STEV2:   .word 5
+ REZ:     .space 4
+ 
+
+
+          .global __start
+__start:
+          adr r0, STEV1
+          ldr r1, [r0]
+          
+          adr r0, STEV2
+          ldr r2, [r0]
+          
+          sub r3, r1, r2
+          
+          adr r0, REZ
+          str r3, [r0]
+
+          
+          
+__end:    b __end 
+ 
+
+
+2. NALOGA
+
+
+
+        .text
+ STEV1:   .word 0x50 @šestanjstiško
+ STEV2:   .word 100 @desetiško
+ STEV3:   .word 0x2F  @šestanjstiško
+ 
+
+
+          .global __start
+__start:
+          adr r0, STEV1
+          ldr r1, [r0]
+          
+          adr r0, STEV2
+          ldr r2, [r0]
+          
+          adr r0, STEV3
+          ldr r3, [r0]
+          
+          add r2, r2, r3
+          sub r1, r2, r1
+          
+          adr r0, STEV1
+          str r1, [r0]
+          
+          
+__end:    b __end 
+ 
+
+
+
+
+NALOGA 3.
+
+
+        .text
+     A:   .word 0x12345678
+     B:   .byte 128 
+          .align
+          
+     C:   .hword 0xF123
+    
+          .align
+          
+          .global __start
+__start:
+    
+       adr r0, A
+       ldr r1, [r0]
+       
+       adr r0, B
+       ldrb r2, [r0]
+       ldrsb r3, [r0]
+       
+       adr r0, C
+       ldrh r4, [r0]
+       ldrsh r5, [r0]
+           
+    
+    
+ __end:    b __end 
