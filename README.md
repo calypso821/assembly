@@ -16,8 +16,8 @@ Repository containing assembly language programming, embedded systems implementa
 - [PIO controller design](mimo/PIO_controller.md)
 - [LED control implementation](mimo/LED_blink.md)
 
-## NeoLight (Ambilight)
-- [Custom ambilight implementation - README](neolight/README.md)
+## NeoLight (Ambient Light System)
+- [Custom Ambient Light implementation - README](neolight/README.md)
 - [FRI-SMS driver for NeoPixel control](neolight/friSMS_driver.md)
 - Timer-based PWM generation
 - Video capture processing
